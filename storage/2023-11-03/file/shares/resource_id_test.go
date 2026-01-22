@@ -27,7 +27,7 @@ func TestParseShareIDStandard(t *testing.T) {
 	}
 	actual, err := ParseShareID(input, "core.windows.net")
 	if err != nil {
-		t.Fatalf(err.Error())
+		t.Fatal(err)
 	}
 	if actual.AccountId.AccountName != expected.AccountId.AccountName {
 		t.Fatalf("expected AccountName to be %q but got %q", expected.AccountId.AccountName, actual.AccountId.AccountName)
@@ -56,7 +56,7 @@ func TestParseShareIDInADNSZone(t *testing.T) {
 	}
 	actual, err := ParseShareID(input, "storage.azure.net")
 	if err != nil {
-		t.Fatalf(err.Error())
+		t.Fatal(err)
 	}
 	if actual.AccountId.AccountName != expected.AccountId.AccountName {
 		t.Fatalf("expected AccountName to be %q but got %q", expected.AccountId.AccountName, actual.AccountId.AccountName)
@@ -89,7 +89,7 @@ func TestParseShareIDInAnEdgeZone(t *testing.T) {
 	}
 	actual, err := ParseShareID(input, "edgestorage.azure.net")
 	if err != nil {
-		t.Fatalf(err.Error())
+		t.Fatal(err)
 	}
 	if actual.AccountId.AccountName != expected.AccountId.AccountName {
 		t.Fatalf("expected AccountName to be %q but got %q", expected.AccountId.AccountName, actual.AccountId.AccountName)

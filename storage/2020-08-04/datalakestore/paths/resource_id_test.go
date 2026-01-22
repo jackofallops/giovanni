@@ -20,7 +20,7 @@ func TestParsePathIDStandard(t *testing.T) {
 	}
 	actual, err := ParsePathID(input, "core.windows.net")
 	if err != nil {
-		t.Fatalf(err.Error())
+		t.Fatal(err)
 	}
 	if actual.AccountId.AccountName != expected.AccountId.AccountName {
 		t.Fatalf("expected AccountName to be %q but got %q", expected.AccountId.AccountName, actual.AccountId.AccountName)
@@ -53,7 +53,7 @@ func TestParsePathIDInADNSZone(t *testing.T) {
 	}
 	actual, err := ParsePathID(input, "storage.azure.net")
 	if err != nil {
-		t.Fatalf(err.Error())
+		t.Fatal(err)
 	}
 	if actual.AccountId.AccountName != expected.AccountId.AccountName {
 		t.Fatalf("expected AccountName to be %q but got %q", expected.AccountId.AccountName, actual.AccountId.AccountName)
@@ -90,7 +90,7 @@ func TestParsePathIDInAnEdgeZone(t *testing.T) {
 	}
 	actual, err := ParsePathID(input, "edgestorage.azure.net")
 	if err != nil {
-		t.Fatalf(err.Error())
+		t.Fatal(err)
 	}
 	if actual.AccountId.AccountName != expected.AccountId.AccountName {
 		t.Fatalf("expected AccountName to be %q but got %q", expected.AccountId.AccountName, actual.AccountId.AccountName)

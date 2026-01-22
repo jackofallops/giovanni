@@ -27,7 +27,7 @@ func TestParseFileSystemIDStandard(t *testing.T) {
 	}
 	actual, err := ParseFileSystemID(input, "core.windows.net")
 	if err != nil {
-		t.Fatalf(err.Error())
+		t.Fatal(err)
 	}
 	if actual.AccountId.AccountName != expected.AccountId.AccountName {
 		t.Fatalf("expected AccountName to be %q but got %q", expected.AccountId.AccountName, actual.AccountId.AccountName)
@@ -56,7 +56,7 @@ func TestParseFileSystemIDInADNSZone(t *testing.T) {
 	}
 	actual, err := ParseFileSystemID(input, "storage.azure.net")
 	if err != nil {
-		t.Fatalf(err.Error())
+		t.Fatal(err)
 	}
 	if actual.AccountId.AccountName != expected.AccountId.AccountName {
 		t.Fatalf("expected AccountName to be %q but got %q", expected.AccountId.AccountName, actual.AccountId.AccountName)
@@ -89,7 +89,7 @@ func TestParseFileSystemIDInAnEdgeZone(t *testing.T) {
 	}
 	actual, err := ParseFileSystemID(input, "edgestorage.azure.net")
 	if err != nil {
-		t.Fatalf(err.Error())
+		t.Fatal(err)
 	}
 	if actual.AccountId.AccountName != expected.AccountId.AccountName {
 		t.Fatalf("expected AccountName to be %q but got %q", expected.AccountId.AccountName, actual.AccountId.AccountName)

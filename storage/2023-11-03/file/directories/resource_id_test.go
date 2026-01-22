@@ -20,7 +20,7 @@ func TestParseDirectoryIDStandard(t *testing.T) {
 	}
 	actual, err := ParseDirectoryID(input, "core.windows.net")
 	if err != nil {
-		t.Fatalf(err.Error())
+		t.Fatal(err)
 	}
 	if actual.AccountId.AccountName != expected.AccountId.AccountName {
 		t.Fatalf("expected AccountName to be %q but got %q", expected.AccountId.AccountName, actual.AccountId.AccountName)
@@ -53,7 +53,7 @@ func TestParseDirectoryIDInADNSZone(t *testing.T) {
 	}
 	actual, err := ParseDirectoryID(input, "storage.azure.net")
 	if err != nil {
-		t.Fatalf(err.Error())
+		t.Fatal(err)
 	}
 	if actual.AccountId.AccountName != expected.AccountId.AccountName {
 		t.Fatalf("expected AccountName to be %q but got %q", expected.AccountId.AccountName, actual.AccountId.AccountName)
@@ -90,7 +90,7 @@ func TestParseDirectoryIDInAnEdgeZone(t *testing.T) {
 	}
 	actual, err := ParseDirectoryID(input, "edgestorage.azure.net")
 	if err != nil {
-		t.Fatalf(err.Error())
+		t.Fatal(err)
 	}
 	if actual.AccountId.AccountName != expected.AccountId.AccountName {
 		t.Fatalf("expected AccountName to be %q but got %q", expected.AccountId.AccountName, actual.AccountId.AccountName)
