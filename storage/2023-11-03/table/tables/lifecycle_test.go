@@ -120,6 +120,168 @@ func TestTablesLifecycle(t *testing.T) {
 		}
 	}
 
+	// set some properties
+	props := StorageServiceProperties{
+		Logging: &LoggingConfig{
+			Version: "1.0",
+			Delete:  true,
+			Read:    true,
+			Write:   true,
+			RetentionPolicy: RetentionPolicy{
+				Enabled: true,
+				Days:    7,
+			},
+		},
+		Cors: &Cors{
+			CorsRule: []CorsRule{
+				{
+					AllowedMethods:  "GET,PUT",
+					AllowedOrigins:  "http://www.example.com",
+					ExposedHeaders:  "x-tempo-*",
+					AllowedHeaders:  "x-tempo-*",
+					MaxAgeInSeconds: 500,
+				},
+				{
+					AllowedMethods:  "POST",
+					AllowedOrigins:  "http://www.test.com",
+					ExposedHeaders:  "*",
+					AllowedHeaders:  "x-method-*",
+					MaxAgeInSeconds: 200,
+				},
+			},
+		},
+		HourMetrics: &MetricsConfig{
+			Version: "1.0",
+			Enabled: false,
+			RetentionPolicy: RetentionPolicy{
+				Enabled: true,
+				Days:    7,
+			},
+		},
+		MinuteMetrics: &MetricsConfig{
+			Version: "1.0",
+			Enabled: false,
+			RetentionPolicy: RetentionPolicy{
+				Enabled: true,
+				Days:    7,
+			},
+		},
+	}
+
+	_, err = tablesClient.SetServiceProperties(ctx, SetStorageServicePropertiesInput{Properties: props})
+	if err != nil {
+		t.Fatalf("SetServiceProperties failed: %s", err)
+	}
+
+	// tables take a while to apply properties, so unfortunately...
+	time.Sleep(15 * time.Second)
+
+	properties, err := tablesClient.GetServiceProperties(ctx)
+	if err != nil {
+		t.Fatalf("GetServiceProperties failed: %s", err)
+	}
+
+	if len(properties.Cors.CorsRule) > 1 {
+		if properties.Cors.CorsRule[0].AllowedMethods != "GET,PUT" {
+			t.Fatalf("CORS Methods weren't set!")
+		}
+		if properties.Cors.CorsRule[1].AllowedMethods != "POST" {
+			t.Fatalf("CORS Methods weren't set!")
+		}
+	} else {
+		t.Fatalf("CORS Methods weren't set!")
+	}
+
+	if properties.HourMetrics.Enabled {
+		t.Fatalf("HourMetrics were enabled when they shouldn't be!")
+	}
+
+	if properties.MinuteMetrics.Enabled {
+		t.Fatalf("MinuteMetrics were enabled when they shouldn't be!")
+	}
+
+	if !properties.Logging.Write {
+		t.Fatalf("Logging Write's was not enabled when they should be!")
+	}
+
+	includeAPIS := true
+	// set some properties
+	props2 := StorageServiceProperties{
+		Logging: &LoggingConfig{
+			Version: "1.0",
+			Delete:  true,
+			Read:    true,
+			Write:   true,
+			RetentionPolicy: RetentionPolicy{
+				Enabled: true,
+				Days:    7,
+			},
+		},
+		Cors: &Cors{
+			CorsRule: []CorsRule{
+				{
+					AllowedMethods:  "PUT",
+					AllowedOrigins:  "http://www.example.com",
+					ExposedHeaders:  "x-tempo-*",
+					AllowedHeaders:  "x-tempo-*",
+					MaxAgeInSeconds: 500,
+				},
+			},
+		},
+		HourMetrics: &MetricsConfig{
+			Version: "1.0",
+			Enabled: true,
+			RetentionPolicy: RetentionPolicy{
+				Enabled: true,
+				Days:    7,
+			},
+			IncludeAPIs: &includeAPIS,
+		},
+		MinuteMetrics: &MetricsConfig{
+			Version: "1.0",
+			Enabled: false,
+			RetentionPolicy: RetentionPolicy{
+				Enabled: true,
+				Days:    7,
+			},
+		},
+	}
+
+	_, err = tablesClient.SetServiceProperties(ctx, SetStorageServicePropertiesInput{Properties: props2})
+	if err != nil {
+		t.Fatalf("SetServiceProperties failed: %s", err)
+	}
+
+	// tables take a while to apply properties, so unfortunately...
+	time.Sleep(15 * time.Second)
+
+	properties, err = tablesClient.GetServiceProperties(ctx)
+	if err != nil {
+		t.Fatalf("GetServiceProperties failed: %s", err)
+	}
+
+	if len(properties.Cors.CorsRule) == 1 {
+		if properties.Cors.CorsRule[0].AllowedMethods != "PUT" {
+			t.Fatalf("CORS Methods weren't set!")
+		}
+	} else {
+		t.Fatalf("CORS Methods weren't set!")
+	}
+
+	if !properties.HourMetrics.Enabled {
+		t.Fatalf("HourMetrics were enabled when they shouldn't be!")
+	}
+
+	if properties.MinuteMetrics.Enabled {
+		t.Fatalf("MinuteMetrics were enabled when they shouldn't be!")
+	}
+
+	if !properties.Logging.Write {
+		t.Fatalf("Logging Write's was not enabled when they should be!")
+	}
+
+	log.Printf("[DEBUG] Deleting..")
+
 	t.Logf("[DEBUG] Deleting Table %q..", tableName)
 	if _, err := tablesClient.Delete(ctx, tableName); err != nil {
 		t.Fatalf("Error deleting %q: %s", tableName, err)
