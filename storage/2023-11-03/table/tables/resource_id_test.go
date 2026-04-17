@@ -82,7 +82,7 @@ func TestParseTableIDInADNSZone(t *testing.T) {
 		},
 		TableName: "table1",
 	}
-	actual, err := ParseTableID(input, "storage.azure.net")
+	actual, err := ParseTableID(input, "core.windows.net")
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
@@ -115,7 +115,7 @@ func TestParseTableIDInAnEdgeZone(t *testing.T) {
 		},
 		TableName: "table1",
 	}
-	actual, err := ParseTableID(input, "edgestorage.azure.net")
+	actual, err := ParseTableID(input, "core.windows.net")
 	if err != nil {
 		t.Fatalf(err.Error())
 	}

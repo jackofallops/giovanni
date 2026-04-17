@@ -54,7 +54,7 @@ func TestParseContainerIDInADNSZone(t *testing.T) {
 		},
 		ContainerName: "container1",
 	}
-	actual, err := ParseContainerID(input, "storage.azure.net")
+	actual, err := ParseContainerID(input, "core.windows.net")
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
@@ -87,7 +87,7 @@ func TestParseContainerIDInAnEdgeZone(t *testing.T) {
 		},
 		ContainerName: "container1",
 	}
-	actual, err := ParseContainerID(input, "edgestorage.azure.net")
+	actual, err := ParseContainerID(input, "core.windows.net")
 	if err != nil {
 		t.Fatalf(err.Error())
 	}

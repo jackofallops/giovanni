@@ -98,7 +98,7 @@ func TestParseBlobIDInADNSZone(t *testing.T) {
 		ContainerName: "container1",
 		BlobName:      "blob1.vhd",
 	}
-	actual, err := ParseBlobID(input, "storage.azure.net")
+	actual, err := ParseBlobID(input, "core.windows.net")
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
@@ -135,7 +135,7 @@ func TestParseBlobIDInAnEdgeZone(t *testing.T) {
 		ContainerName: "container1",
 		BlobName:      "blob1.vhd",
 	}
-	actual, err := ParseBlobID(input, "edgestorage.azure.net")
+	actual, err := ParseBlobID(input, "core.windows.net")
 	if err != nil {
 		t.Fatalf(err.Error())
 	}

@@ -36,7 +36,7 @@ func TestParseAccountIDInDNSZone(t *testing.T) {
 		SubDomainType: BlobSubDomainType,
 		DomainSuffix:  "storage.azure.net",
 	}
-	actual, err := ParseAccountID(input, "storage.azure.net")
+	actual, err := ParseAccountID(input, "core.windows.net")
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
@@ -69,7 +69,7 @@ func TestParseAccountIDInEdgeZone(t *testing.T) {
 		SubDomainType: BlobSubDomainType,
 		DomainSuffix:  "edgestorage.azure.net",
 	}
-	actual, err := ParseAccountID(input, "edgestorage.azure.net")
+	actual, err := ParseAccountID(input, "core.windows.net")
 	if err != nil {
 		t.Fatalf(err.Error())
 	}

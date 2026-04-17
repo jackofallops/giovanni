@@ -54,7 +54,7 @@ func TestParseQueueIDInADNSZone(t *testing.T) {
 		},
 		QueueName: "queue1",
 	}
-	actual, err := ParseQueueID(input, "storage.azure.net")
+	actual, err := ParseQueueID(input, "core.windows.net")
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
@@ -87,7 +87,7 @@ func TestParseQueueIDInAnEdgeZone(t *testing.T) {
 		},
 		QueueName: "queue1",
 	}
-	actual, err := ParseQueueID(input, "edgestorage.azure.net")
+	actual, err := ParseQueueID(input, "core.windows.net")
 	if err != nil {
 		t.Fatalf(err.Error())
 	}

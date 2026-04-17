@@ -54,7 +54,7 @@ func TestParseShareIDInADNSZone(t *testing.T) {
 		},
 		ShareName: "share1",
 	}
-	actual, err := ParseShareID(input, "storage.azure.net")
+	actual, err := ParseShareID(input, "core.windows.net")
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
@@ -87,7 +87,7 @@ func TestParseShareIDInAnEdgeZone(t *testing.T) {
 		},
 		ShareName: "share1",
 	}
-	actual, err := ParseShareID(input, "edgestorage.azure.net")
+	actual, err := ParseShareID(input, "core.windows.net")
 	if err != nil {
 		t.Fatalf(err.Error())
 	}

@@ -56,7 +56,7 @@ func TestParseFileIDInADNSZone(t *testing.T) {
 		DirectoryPath: "path",
 		FileName:      "file.txt",
 	}
-	actual, err := ParseFileID(input, "storage.azure.net")
+	actual, err := ParseFileID(input, "core.windows.net")
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
@@ -97,7 +97,7 @@ func TestParseFileIDInAnEdgeZone(t *testing.T) {
 		DirectoryPath: "some/path",
 		FileName:      "file.txt",
 	}
-	actual, err := ParseFileID(input, "edgestorage.azure.net")
+	actual, err := ParseFileID(input, "core.windows.net")
 	if err != nil {
 		t.Fatalf(err.Error())
 	}

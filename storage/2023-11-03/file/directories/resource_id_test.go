@@ -51,7 +51,7 @@ func TestParseDirectoryIDInADNSZone(t *testing.T) {
 		ShareName:     "share1",
 		DirectoryPath: "path",
 	}
-	actual, err := ParseDirectoryID(input, "storage.azure.net")
+	actual, err := ParseDirectoryID(input, "core.windows.net")
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
@@ -88,7 +88,7 @@ func TestParseDirectoryIDInAnEdgeZone(t *testing.T) {
 		ShareName:     "share1",
 		DirectoryPath: "some/path",
 	}
-	actual, err := ParseDirectoryID(input, "edgestorage.azure.net")
+	actual, err := ParseDirectoryID(input, "core.windows.net")
 	if err != nil {
 		t.Fatalf(err.Error())
 	}

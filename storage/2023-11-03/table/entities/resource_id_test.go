@@ -56,7 +56,7 @@ func TestParseEntityIDInADNSZone(t *testing.T) {
 		PartitionKey: "partition1",
 		RowKey:       "row1",
 	}
-	actual, err := ParseEntityID(input, "storage.azure.net")
+	actual, err := ParseEntityID(input, "core.windows.net")
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
@@ -97,7 +97,7 @@ func TestParseEntityIDInAnEdgeZone(t *testing.T) {
 		PartitionKey: "partition1",
 		RowKey:       "row1",
 	}
-	actual, err := ParseEntityID(input, "edgestorage.azure.net")
+	actual, err := ParseEntityID(input, "core.windows.net")
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
