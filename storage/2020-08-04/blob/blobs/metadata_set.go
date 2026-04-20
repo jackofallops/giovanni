@@ -40,7 +40,7 @@ func (c Client) SetMetaData(ctx context.Context, containerName, blobName string,
 	}
 
 	if err := metadata.Validate(input.MetaData); err != nil {
-		return resp, fmt.Errorf(fmt.Sprintf("`input.MetaData` is not valid: %s.", err))
+		return resp, fmt.Errorf("`input.MetaData` is not valid: %s", err)
 	}
 
 	opts := client.RequestOptions{

@@ -55,7 +55,7 @@ func (c Client) PutBlockBlob(ctx context.Context, containerName, blobName string
 	}
 
 	if err = metadata.Validate(input.MetaData); err != nil {
-		err = fmt.Errorf(fmt.Sprintf("`input.MetaData` is not valid: %s.", err))
+		err = fmt.Errorf("`input.MetaData` is not valid: %s", err)
 		return
 	}
 

@@ -62,7 +62,7 @@ func (c Client) PutPageUpdate(ctx context.Context, containerName, blobName strin
 	expectedSize := (input.EndByte - input.StartByte) + 1
 	actualSize := int64(len(input.Content))
 	if expectedSize != actualSize {
-		return resp, fmt.Errorf(fmt.Sprintf("Content Size was defined as %d but got %d.", expectedSize, actualSize))
+		return resp, fmt.Errorf("content Size was defined as %d but got %d", expectedSize, actualSize)
 	}
 
 	opts := client.RequestOptions{

@@ -51,7 +51,7 @@ func (c Client) PutByteRange(ctx context.Context, shareName, path, fileName stri
 	expectedBytes := input.EndBytes - input.StartBytes
 	actualBytes := len(input.Content)
 	if expectedBytes != int64(actualBytes) {
-		return resp, fmt.Errorf(fmt.Sprintf("The specified byte-range (%d) didn't match the content size (%d).", expectedBytes, actualBytes))
+		return resp, fmt.Errorf("the specified byte-range (%d) didn't match the content size (%d)", expectedBytes, actualBytes)
 	}
 
 	if expectedBytes > (4 * 1024 * 1024) {
